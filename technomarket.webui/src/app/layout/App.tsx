@@ -1,23 +1,34 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from './Navbar/Navbar';
-import Jumbotron from '../../components/Home/Jumbotron/Jumbotron';
-import agent from '../api/agent';
+import { observer } from 'mobx-react-lite';
+import { Route, Switch } from 'react-router-dom';
+import HomePage from '../../pages/HomePage'
+import CreateProductPage from '../../pages/admin/CreateProductPage'
+import { Container } from 'semantic-ui-react';
+import ProductDetails from '../../components/Products/details/ProductDetails'
 
-function App() {
-
-  useEffect(() => {
-    agent.Products.list().then(response => {
-      console.log(response);
-    })
-  }, [])
-
+const App = () => {
 
   return (
     <>
       <Navbar />
-      <Jumbotron />
+      <Route path='/' component={HomePage} exact />
+      <Route
+        path={'/(.+)'}
+        render={() => (
+          <>
+            <Container>
+              <Switch>
+                  <Route path='/products/:id' component={ProductDetails} />
+                  <Route path='/createproduct' component={CreateProductPage} />
+              </Switch>
+            </Container>
+          </>
+        )}
+
+      />
     </>
   );
 }
 
-export default App;
+export default observer(App);

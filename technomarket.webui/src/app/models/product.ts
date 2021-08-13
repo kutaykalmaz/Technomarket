@@ -12,3 +12,7 @@ export interface Product {
     category: string,
     subCategory: string
 }
+
+// export interface CreateProductFormValues {
+
+// }

@@ -8,6 +8,10 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: #eee;
+}
+
 .ui.segment {
     border-radius: 0;
 }
