@@ -1,0 +1,17 @@
+.categoryLink {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.oldPrice {
+    text-decoration: line-through;
+    font-size: 20px;
+    color: #999999;
+    margin-bottom: 10px;
+}
+
+.newPrice {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}

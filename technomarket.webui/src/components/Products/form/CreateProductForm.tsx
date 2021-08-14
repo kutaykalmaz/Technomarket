@@ -1,20 +1,11 @@
-// import { Form, Formik } from 'formik'
-// import React from 'react'
-// import { Header } from 'semantic-ui-react'
+import { Form, Formik } from 'formik'
+import React from 'react'
+import { Header } from 'semantic-ui-react'
 
-// const CreateProductForm = () => {
-//     return (
-//         <Formik
-//             initialValues={}
-//         >
-//             {formik => (
-//                 <Header as='h1' content='Ürün Oluştur'/>
-//                 <Form>
+const CreateProductForm = () => {
+    return (
+        <h1>Create Product Form</h1>
+    )
+}
 
-//                 </Form>
-//             )}
-//         </Formik>
-//     )
-// }
-
-// export default CreateProductForm
+export default CreateProductForm

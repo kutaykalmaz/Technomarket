@@ -1,18 +1,15 @@
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Grid } from 'semantic-ui-react'
 import { useStore } from '../../../app/stores/store'
-import RingLoader from "react-spinners/RingLoader";
-import { Grid } from 'semantic-ui-react';
+import LoadingComponent from './LoadingComponent'
+import DetailsNavigation from './DetailsNavigation'
+import ImageSlider from './slider/ImageSlider'
+import ProductInformations from './ProductInformations'
+import TabSection from './TabSection'
 
 const ProductDetails = () => {
-
-    const style = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems:'center',
-        height: 'calc(100vh - 60px)'
-    }
 
     const { productStore } = useStore()
     const { selectedProduct: product,
@@ -25,21 +22,30 @@ const ProductDetails = () => {
     }, [id, loadProduct, resetSelectedProduct]);
 
     if (loadingInitial) return (
-        <Grid>
-            <Grid.Column style={style}>
-                <RingLoader color={'#1B1C1D'} loading={loadingInitial} size={60} />
-            </Grid.Column>
-        </Grid>
+        <LoadingComponent loadingInitial={loadingInitial} />
     )
 
-
     return (
-        <div>
-            {
-                product &&
-                product.name
-            }
-        </div>
+        <Grid style={{ marginTop: '20px' }}>
+            <Grid.Row>
+                {product &&
+                    <DetailsNavigation product={product} />}
+            </Grid.Row>
+            <Grid.Row style={{ backgroundColor: 'white' }}>
+                <Grid.Column width='8' style={{ padding: '10px', borderRight: '1px solid #eee' }}>
+                    {product?.photos &&
+                        <ImageSlider productPhotos={product?.photos} />}
+                </Grid.Column>
+                <Grid.Column width='8'>
+                    {product &&
+                        <ProductInformations product={product} />}
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row style={{ backgroundColor: 'white', padding:'20px' }}>
+                {product &&
+                    <TabSection product={product} />}
+            </Grid.Row>
+        </Grid>
     )
 }
 

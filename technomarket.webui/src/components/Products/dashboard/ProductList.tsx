@@ -23,7 +23,7 @@ const ProductList = () => {
     }, [loadProducts, resetProducts])
 
     if (loadingInitial) return (
-        <Grid columns={3} stackable>
+        <Grid columns={4} stackable>
             <Grid.Row centered>
                 <Header as='h1'>Fırsat Ürünler</Header>
             </Grid.Row>
@@ -47,7 +47,7 @@ const ProductList = () => {
                 <Header as='h1'>Fırsat Ürünler</Header>
             </Grid.Row>
             <Grid.Row width='16'>
-                <Card.Group itemsPerRow={3}>
+                <Card.Group itemsPerRow={4}>
                     {products &&
                         products.map(product => (
                             <ProductListItem key={product.id} product={product} />

@@ -7,11 +7,11 @@ import ProductList from './ProductList'
 const ProductDashboard = () => {
     return (
         <Grid style={{marginTop:'30px'}}>
-            <Grid.Column width='4'>
-                {/* <CategoryList /> */}
-            </Grid.Column>
+            {/* <Grid.Column width='4'>
+                <CategoryList />
+            </Grid.Column> */}
 
-            <Grid.Column width='12'>
+            <Grid.Column width='16'>
                 <ProductList />
             </Grid.Column>
         </Grid>
