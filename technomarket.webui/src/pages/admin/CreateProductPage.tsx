@@ -1,12 +1,13 @@
+import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
-// import CreateProductForm from '../../components/Products/form/CreateProductForm'
+import CreateProductForm from '../../components/Products/form/CreateProductForm'
 
 const CreateProductPage = () => {
     return (
         <Grid style={{marginTop:'50px'}}>
             <Grid.Column width='10'>
-                {/* <CreateProductForm /> */}
+                <CreateProductForm />
             </Grid.Column>
             <Grid.Column width='6'>
                 <img src="/assets/unDraw/createProduct.svg" alt="" style={{width:'300px'}}/>
@@ -15,4 +16,4 @@ const CreateProductPage = () => {
     )
 }
 
-export default CreateProductPage
+export default observer(CreateProductPage)

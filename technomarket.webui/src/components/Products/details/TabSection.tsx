@@ -11,13 +11,12 @@ interface Props {
 
 const TabSection = ({ product }: Props) => {
 
-    console.log(product.description)
 
     const panes = [
         { menuItem: 'Ürün Açıklaması', render: () =>  <ProductDescription 
             description={product.description} /> },
         { menuItem: 'Ürün Yorumları', render: () => <ProductComments /> },
-        { menuItem: 'Tab 3', render: () => 'Tab 3 Content' },
+        // { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
 
     return (

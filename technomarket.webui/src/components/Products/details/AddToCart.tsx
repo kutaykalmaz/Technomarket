@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Button, Icon } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import './styles/AddToCart.css'
 import { BiCart } from 'react-icons/bi'
 
@@ -14,11 +14,11 @@ const AddToCart = () => {
                     <button
                         className={quantity === 0 ? 'disabled decrease' : 'decrease'}
                         type='button'
-                        onClick={(() => quantity != 0 && setQuantity(quantity - 1))}
+                        onClick={(() => quantity !== 0 && setQuantity(quantity - 1))}
                     >
                         -
                     </button>
-                    <input type="text" id='quantity' value={quantity} />
+                    <input type="text" id='quantity' value={quantity} readOnly />
                     <button className='increase' type='button' onClick={(() => setQuantity(quantity + 1))}>+</button>
                 </div>
             </Grid.Column>

@@ -41,9 +41,12 @@ const ProductDetails = () => {
                         <ProductInformations product={product} />}
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row style={{ backgroundColor: 'white', padding:'20px' }}>
-                {product &&
-                    <TabSection product={product} />}
+            <Grid.Row style={{ backgroundColor: 'white', padding: '20px' }}>
+                <Grid.Column width='16'>
+                    {product &&
+                        <TabSection product={product} />}
+                </Grid.Column>
+
             </Grid.Row>
         </Grid>
     )

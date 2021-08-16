@@ -39,5 +39,11 @@ namespace technomarket.API.Controllers
         {
             return HandleResult(await Mediator.Send(new DeleteSubCategory.Command { Id = id }));
         }
+
+        [HttpGet("options/")]
+        public async Task<IActionResult> SubCategoryOptions()
+        {
+            return HandleResult(await Mediator.Send(new SubCategoryOptions.Query()));
+        }
     }
 }

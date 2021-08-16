@@ -1,6 +1,8 @@
 using AutoMapper;
 using technomarket.application.DTOs;
+using technomarket.application.DTOs.Category;
 using technomarket.application.DTOs.ProductPhoto;
+using technomarket.application.DTOs.SubCategory;
 using technomarket.entity;
 
 namespace technomarket.application.Core
@@ -29,6 +31,15 @@ namespace technomarket.application.Core
             CreateMap<Product, ProductBasicDto>();
             
             CreateMap<ProductPhoto, ProductPhotoDto>();
+
+            CreateMap<Category, CategoryOptionsDto>()
+                .ForMember(d => d.Text, o => o.MapFrom(s => s.Name))
+                .ForMember(d => d.Value, o => o.MapFrom(s => s.Id));
+
+            CreateMap<SubCategory, SubCategoryOptionsDto>()
+                .ForMember(d => d.Text, o => o.MapFrom(s => s.Name))
+                .ForMember(d => d.Value, o => o.MapFrom(s => s.Id))
+                .ForMember(d => d.Categoryid, o => o.MapFrom(s => s.Category.Id));
         }
     }
 }

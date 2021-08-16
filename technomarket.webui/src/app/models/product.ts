@@ -13,6 +13,15 @@ export interface Product {
     subCategory: string
 }
 
-// export interface CreateProductFormValues {
-
-// }
+export class CreateProductFormValues {
+    id: string = '';
+    name: string = '';
+    price: number | undefined = undefined;
+    quantity: number | undefined = undefined;
+    isapproved: boolean = false;
+    ishome: boolean = false;
+    description: string = '';
+    files: Blob[] | undefined = undefined;
+    categoryId: string = '';
+    subCategoryId: string = '';
+}

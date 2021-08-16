@@ -1,0 +1,33 @@
+.dropzone {
+    font-size: 20px;
+    border: 2px dashed #bbb;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    color: #bbb;
+}
+
+.wrongFile {
+    font-size: 20px;
+    border: 2px dashed rgb(255, 0, 0);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    color: rgb(255, 0, 0);
+}
+
+.imageWrap {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    border: 1px solid red;
+    height: 100px;
+    
+}
+
+.uploadedImage {
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
+}

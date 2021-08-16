@@ -13,7 +13,7 @@ const NavBar = () => {
             exact
             to='/'            
           /> */}
-          <Menu.Item as={Link} exact to='/'>
+          <Menu.Item as={Link} to='/'>
             <img src="/assets/logo.png" alt='logo' />
           </Menu.Item>
           <Dropdown text='İşlemler' pointing className='link item'>

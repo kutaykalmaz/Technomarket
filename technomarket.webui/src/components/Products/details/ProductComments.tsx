@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Tab, Comment, Form, Button, Container } from 'semantic-ui-react'
+import { Tab, Comment, Form, Button } from 'semantic-ui-react'
 
 const ProductComments = () => {
     return (
@@ -14,7 +14,7 @@ const ProductComments = () => {
                         </Comment.Metadata>
                         <Comment.Text>How artistic!</Comment.Text>
                         <Comment.Actions>
-                            <a>Reply</a>
+                            <div style={{ color: 'rgba(0,0,0,.4)' }}>Reply</div>
                         </Comment.Actions>
                     </Comment.Content>
                 </Comment>
@@ -30,7 +30,7 @@ const ProductComments = () => {
                             <p>This has been very useful for my research. Thanks as well!</p>
                         </Comment.Text>
                         <Comment.Actions>
-                            <a>Reply</a>
+                            <div style={{ color: 'rgba(0,0,0,.4)' }}>Reply</div>
                         </Comment.Actions>
                     </Comment.Content>
 
@@ -44,7 +44,7 @@ const ProductComments = () => {
                                 </Comment.Metadata>
                                 <Comment.Text>Elliot you are always so right :)</Comment.Text>
                                 <Comment.Actions>
-                                    <a>Reply</a>
+                                    <div style={{ color: 'rgba(0,0,0,.4)' }}>Reply</div>
                                 </Comment.Actions>
                             </Comment.Content>
                         </Comment>
@@ -60,7 +60,7 @@ const ProductComments = () => {
                         </Comment.Metadata>
                         <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
                         <Comment.Actions>
-                            <a>Reply</a>
+                            <div style={{ color: 'rgba(0,0,0,.4)' }}>Reply</div>
                         </Comment.Actions>
                     </Comment.Content>
                 </Comment>
@@ -70,6 +70,7 @@ const ProductComments = () => {
                     <Button content='Add Reply' labelPosition='left' icon='edit' primary />
                 </Form>
             </Comment.Group>
+
         </Tab.Pane>
     )
 }

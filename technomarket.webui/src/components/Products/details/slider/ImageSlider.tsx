@@ -51,7 +51,7 @@ const ImageSlider = ({ productPhotos }: Props) => {
                                 <>
                                     <Image src={productPhotos[current - 1 === -1 ? length - 1 : current - 1].url} />
                                     <Image src={productPhotos[current].url} className='border' />
-                                    <Image src={productPhotos[current + 1 === length ? 0 : current + 1].url} onClick={(() => setCurrent(current + 1))} />
+                                    <Image src={productPhotos[current + 1 === length ? 0 : current + 1].url} />
                                 </> :
                                 <>
                                     {productPhotos.map((photo, index) => (

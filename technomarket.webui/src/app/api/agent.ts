@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { Product } from '../models/product';
+import { CategoryOptions, SubCategoryOptions } from '../models/categoryOptions'
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -28,8 +29,18 @@ const Products = {
     details: (id: string) => requests.get<Product>(`/products/${id}`)
 }
 
+const Categories = {
+    categoryOptions : () => requests.get<CategoryOptions[]>('/categories/options')
+}
+
+const SubCategories = {
+    subCategoriesOptions : () => requests.get<SubCategoryOptions[]>('/subcategories/options')
+}
+
 const agent = {
-    Products
+    Products,
+    Categories,
+    SubCategories
 }
 
 export default agent;
