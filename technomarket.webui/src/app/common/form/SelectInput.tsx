@@ -1,6 +1,7 @@
 import React from 'react'
 import { useField } from 'formik'
 import { Form, Label, Select } from 'semantic-ui-react'
+import { Box, InputLabel } from '@material-ui/core';
 
 interface Props {
     placeholder: string;
@@ -8,7 +9,8 @@ interface Props {
     options?: any;
     label?: string;
     loading?: boolean;
-    
+    disabled?: boolean;
+
 }
 
 const SelectInput = (props: Props) => {
@@ -16,8 +18,14 @@ const SelectInput = (props: Props) => {
     return (
         // '!!' casts string into a boolean
         <Form.Field error={meta.touched && !!meta.error}>
-            <label>{props.label}</label>
-            <Select 
+            <Box paddingBottom={2}>
+                <InputLabel>{props.label}</InputLabel>
+            </Box>
+            <Select
+                disabled={props.disabled}
+                fluid
+                search
+                selection
                 clearable
                 options={props.options}
                 value={field.value || null}
@@ -25,11 +33,11 @@ const SelectInput = (props: Props) => {
                 onBlur={() => helpers.setTouched(true)}
                 placeholder={props.placeholder}
                 loading={props.loading}
-            
+
             />
             {meta.touched && meta.error ? (
                 <Label basic color='red'>{meta.error}</Label>
-            ) : null }
+            ) : null}
         </Form.Field>
     )
 }

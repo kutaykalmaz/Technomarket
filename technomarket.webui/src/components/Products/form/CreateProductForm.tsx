@@ -52,6 +52,8 @@ const CreateProductForm = () => {
 
     const changeSubCategories = (e: any) => {
         relatedSubCategories(e);
+        // relatedSubCategoriesOptions.map((value, data) => console.log(value.text));
+
     }
 
     const [files, setFiles] = useState<any>([]);
@@ -66,7 +68,7 @@ const CreateProductForm = () => {
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <TextInput name='name' placeholder='Ürün Adı' label='Ürün Adı' />
+                        <TextInput name='name' placeholder='Ürün Adı' label='Ürün Adı'/>
                         <TextInput name='price' placeholder='Ürün Fiyatı' label='Ürün Fiyatı' type='number' />
                         <TextInput name='quantity' placeholder='Ürün Adeti' label='Ürün Adeti' type='number' />
                         <TextArea rows={3} placeholder='Ürün Açıklaması' name='description' label='Ürün Açıklaması' />

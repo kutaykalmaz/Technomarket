@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Product } from '../models/product';
+import { CreateProductFormValues, Product } from '../models/product';
 import { CategoryOptions, SubCategoryOptions } from '../models/categoryOptions'
 
 const sleep = (delay: number) => {
@@ -26,15 +26,35 @@ const requests = {
 
 const Products = {
     list: () => requests.get<Product[]>('/products'),
-    details: (id: string) => requests.get<Product>(`/products/${id}`)
+    details: (id: string) => requests.get<Product>(`/products/${id}`),
+    create: (product: CreateProductFormValues) => {
+        let formData = new FormData();
+        product.files?.forEach(file => {
+            formData.append('Files', file)
+        })
+        formData.append('Id', product.id)
+        formData.append('name', product.name)
+        formData.append('price', JSON.stringify(product.price))
+        formData.append('quantity', JSON.stringify(product.quantity))
+        formData.append('description', product.description)
+        formData.append('isapproved', JSON.stringify(product.isapproved))
+        formData.append('ishome', JSON.stringify(product.ishome))
+        formData.append('categoryId', product.categoryId)
+        formData.append('subCategoryId', product.subCategoryId)
+        return axios.post<CreateProductFormValues>('/products', formData, {
+            headers: { 'Content-type': 'multipart/form-data' }
+        })
+    
+    
+    }
 }
 
 const Categories = {
-    categoryOptions : () => requests.get<CategoryOptions[]>('/categories/options')
+    categoryOptions: () => requests.get<CategoryOptions[]>('/categories/options')
 }
 
 const SubCategories = {
-    subCategoriesOptions : () => requests.get<SubCategoryOptions[]>('/subcategories/options')
+    subCategoriesOptions: () => requests.get<SubCategoryOptions[]>('/subcategories/options')
 }
 
 const agent = {

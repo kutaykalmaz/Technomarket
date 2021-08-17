@@ -31,12 +31,10 @@ export default class CategoryStore {
 
     relatedSubCategories = async (categoryId: string) => {
         this.relatedSubCategoriesOptions = [];
-        
         this.calculateLoading = true;
         this.subCategoryOptions.forEach((value) => {
             if(value.categoryid === categoryId) this.relatedSubCategoriesOptions.push(value);
         })
-
         runInAction(() => this.calculateLoading = false);
     }
 

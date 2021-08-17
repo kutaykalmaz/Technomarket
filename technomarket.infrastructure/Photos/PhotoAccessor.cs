@@ -30,8 +30,7 @@ namespace technomarket.infrastructure.Photos
                 await using var stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {
-                    File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(600).Width(600).Crop("fill")
+                    File = new FileDescription(file.FileName, stream)
                 };
 
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);

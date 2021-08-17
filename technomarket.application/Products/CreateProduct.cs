@@ -58,6 +58,7 @@ namespace technomarket.application.Products
                 }
 
                 #region MapSection
+                product.Id = request.Product.Id;
                 product.Name = request.Product.Name;
                 product.Price = request.Product.Price;
                 product.Quantity = request.Product.Quantity;
