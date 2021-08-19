@@ -7,6 +7,6 @@ namespace technomarket.application.DTOs
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public ICollection<SubCategoryDto> SubCategories { get; set; }
+        public ICollection<SubCategoryWithProductDto> SubCategories { get; set; }
     }
 }

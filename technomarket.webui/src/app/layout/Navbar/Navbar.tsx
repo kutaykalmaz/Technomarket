@@ -27,7 +27,12 @@ const NavBar = () => {
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Header content='KATEGORİLER' />
-              <Dropdown.Item>Kategori Oluştur</Dropdown.Item>
+              <Dropdown.Item
+                as={NavLink}
+                to='/createcategory'
+              >
+                Kategori Oluştur
+              </Dropdown.Item>
               <Dropdown.Item>Alt Kategori Oluştur</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

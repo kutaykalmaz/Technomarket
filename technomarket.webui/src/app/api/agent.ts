@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { CreateProductFormValues, Product } from '../models/product';
 import { CategoryOptions, SubCategoryOptions } from '../models/categoryOptions'
+import { Category } from '../models/category';
+import { ISelectedCategory } from '../../pages/admin/CreateCategoryPage';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -50,6 +52,10 @@ const Products = {
 }
 
 const Categories = {
+    list: () => requests.get<Category[]>('/categories'),
+    create: (category: ISelectedCategory) => requests.post<void>('/categories', category),
+    update: (category: ISelectedCategory) => requests.put<void>(`/categories/${category.id}`, category),
+    delete: (id: string) => requests.del<void>(`/categories/${id}`),
     categoryOptions: () => requests.get<CategoryOptions[]>('/categories/options')
 }
 

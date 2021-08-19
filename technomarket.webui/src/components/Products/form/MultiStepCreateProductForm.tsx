@@ -64,7 +64,7 @@ const MultiStepCreateProductForm = () => {
                             <Field name='name' label='Ürün Adı' component={TextField} variant="outlined" fullWidth margin="dense"></Field>
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field name='price' label='Ürün Fiyatı' type='number' component={TextField} variant="outlined" fullWidth margin="dense" value={undefined}></Field>
+                            <Field name='price' label='Ürün Fiyatı' type='number' component={TextField} variant="outlined" fullWidth margin="dense" value={undefined} ></Field>
                         </Box>
                         <Box paddingBottom={2}>
                             <Field name='quantity' label='Ürün Adeti' type='number' component={TextField} variant="outlined" fullWidth margin="dense" value={undefined}></Field>
@@ -107,7 +107,7 @@ const MultiStepCreateProductForm = () => {
                                 showFileNames
                                 dropzoneText="Sürükle ve Bırak veya Tıkla"
                                 showAlerts={false}
-                                filesLimit={20}
+                                filesLimit={10}    
                             />
                         </Box>
                     </FormikStep>

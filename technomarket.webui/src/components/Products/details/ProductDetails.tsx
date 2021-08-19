@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import { useStore } from '../../../app/stores/store'
-import LoadingComponent from './LoadingComponent'
+import LoadingComponent from '../../../app/common/LoadingComponent'
 import DetailsNavigation from './DetailsNavigation'
 import ImageSlider from './slider/ImageSlider'
 import ProductInformations from './ProductInformations'
@@ -22,7 +22,7 @@ const ProductDetails = () => {
     }, [id, loadProduct, resetSelectedProduct]);
 
     if (loadingInitial) return (
-        <LoadingComponent loadingInitial={loadingInitial} />
+        <LoadingComponent loading={loadingInitial} />
     )
 
     return (

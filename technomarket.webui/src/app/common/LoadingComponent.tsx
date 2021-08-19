@@ -1,5 +1,5 @@
 import React from 'react'
-import RingLoader from "react-spinners/RingLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import { Grid } from 'semantic-ui-react';
 
 const style = {
@@ -10,14 +10,15 @@ const style = {
 }
 
 interface Props {
-    loadingInitial: boolean
+    loading: boolean
+    color?: string
 }
 
-const LoadingComponent = ({ loadingInitial }: Props) => {
+const LoadingComponent = (props: Props) => {
     return (
         <Grid>
             <Grid.Column style={style}>
-                <RingLoader color={'#1B1C1D'} loading={loadingInitial} size={60} />
+                <BeatLoader color={props.color ? props.color : '#1B1C1D'} loading={props.loading} size={20} />
             </Grid.Column>
         </Grid>
     )

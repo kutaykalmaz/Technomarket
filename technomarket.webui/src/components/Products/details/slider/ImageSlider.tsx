@@ -55,7 +55,7 @@ const ImageSlider = ({ productPhotos }: Props) => {
                                 </> :
                                 <>
                                     {productPhotos.map((photo, index) => (
-                                        <Image src={photo.url} className={index === current ? 'border' : ''} />
+                                        <Image key={photo.id} src={photo.url} className={index === current ? 'border' : ''} />
                                     ))}
                                 </>
                         }
