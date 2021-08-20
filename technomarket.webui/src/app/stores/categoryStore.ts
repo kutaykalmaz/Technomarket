@@ -1,13 +1,14 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
 import { CategoryOptions } from '../models/categoryOptions';
-import { Category } from '../models/category'
-import { ISelectedCategory } from '../../pages/admin/CreateCategoryPage';
+import { Category, SubCategory } from '../models/category'
+import { ISelectedCategory, ISelectedSubCategory } from '../../pages/admin/CreateCategoryPage';
 
 export default class CategoryStore {
     category: Category[] = []
     categoryOptions: CategoryOptions[] = []
     loading = false;
+    categoryOptionsLoading = false;
     deleteLoading = false;
     loadingPost = false;
 
@@ -30,25 +31,28 @@ export default class CategoryStore {
     }
 
     loadCategoryOptions = async () => {
-        this.loading = true;
+        this.categoryOptions = []
+        this.categoryOptionsLoading = true;
         try {
             const result = await agent.Categories.categoryOptions();
             result.forEach(categoryOptions => {
                 this.setCategoryOptions(categoryOptions);
             })
-            runInAction(() => this.loading = false);
+            runInAction(() => this.categoryOptionsLoading = false);
         } catch (error) {
             console.log(error);
-            runInAction(() => this.loading = false);
+            runInAction(() => this.categoryOptionsLoading = false);
         }
     }
 
     createCategory = async (category: ISelectedCategory) => {
         this.loadingPost = true
+        const categoryOption: CategoryOptions = { text: category.name, value: category.id }
         try {
             await agent.Categories.create(category);
             runInAction(() => {
                 this.category.push(category)
+                this.setCategoryOptions(categoryOption)
                 this.loadingPost = false
             })
         } catch (error) {
@@ -63,7 +67,7 @@ export default class CategoryStore {
             await agent.Categories.update(category)
             runInAction(() => {
                 this.category.forEach((value) => {
-                    if(value.id === category.id) value.name = category.name
+                    if (value.id === category.id) value.name = category.name
                     this.loadingPost = false;
                 })
             })
@@ -85,6 +89,23 @@ export default class CategoryStore {
             console.log(error)
             runInAction(() => this.deleteLoading = false)
         }
+    }
+
+    addOrUpdateSubCategory = (subCategory: ISelectedSubCategory) => {
+        const subCategoryToAdd: SubCategory = { id: subCategory.id, name: subCategory.name, products: [] }
+        let isPresent = this.category.find(c => c.id === subCategory.category)?.subCategories?.find(s => s.id === subCategory.id)
+        if (isPresent === undefined) this.category.find(c => c.id === subCategory.category)?.subCategories?.push(subCategoryToAdd);
+        else {
+            isPresent.id = subCategory.id
+            isPresent.name = subCategory.name
+        }
+    }
+
+    deleteSubCategory = (subCategory: ISelectedSubCategory) => {
+        const category = this.category.find(c => c.id === subCategory.category);
+        if (category === undefined) return;
+
+        category.subCategories = category.subCategories?.filter(s => s.id !== subCategory.id)
     }
 
     private setCategory = (category: Category) => {

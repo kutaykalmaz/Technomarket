@@ -94,7 +94,7 @@ const Row = ({ category, setSelectedCategory }: Props) => {
                                 <TableBody>
                                     {category.subCategories && category.subCategories.map((subCategory: SubCategory) => (
                                         <TableRow key={subCategory.id} style={{marginBottom:'10'}}>
-                                            <SubCategoryAccordion subCategory={subCategory} />
+                                            <SubCategoryAccordion subCategory={subCategory} category={category.id} />
                                         </TableRow>
                                     ))}
                                 </TableBody>

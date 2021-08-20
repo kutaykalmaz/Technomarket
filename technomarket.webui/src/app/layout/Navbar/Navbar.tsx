@@ -21,29 +21,36 @@ const NavBar = () => {
               <Dropdown.Header content='Ürünler' />
               <Dropdown.Item
                 as={NavLink}
-                to='/createproduct'
+                to='/admin/products'
+              >
+                Ürünler
+              </Dropdown.Item>
+
+              <Dropdown.Item
+                as={NavLink}
+                to='/admin/createproduct'
               >
                 Ürün Oluştur
               </Dropdown.Item>
+
               <Dropdown.Divider />
               <Dropdown.Header content='KATEGORİLER' />
               <Dropdown.Item
                 as={NavLink}
-                to='/createcategory'
+                to='/admin/createcategory'
               >
-                Kategori Oluştur
+                Kategori Yönetim
               </Dropdown.Item>
-              <Dropdown.Item>Alt Kategori Oluştur</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Button 
-                inverted 
-                content='Giriş Yap' 
+              <Button
+                inverted
+                content='Giriş Yap'
                 style={{ padding: '10px 20px' }}
                 color='blue'
-               />
+              />
             </Menu.Item>
           </Menu.Menu>
         </Container>

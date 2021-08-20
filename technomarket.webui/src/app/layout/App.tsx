@@ -8,6 +8,9 @@ import CreateCategoryPage from '../../pages/admin/CreateCategoryPage'
 import { Container } from 'semantic-ui-react';
 import ProductDetails from '../../components/Products/details/ProductDetails'
 import { ToastContainer } from 'react-toastify'
+import Footer from './Footer/Footer'
+import AdminProductDashboard from '../../components/Products/admin/AdminProductDashboard'
+import AdminProductEdit from '../../components/Products/admin/AdminProductEdit'
 
 const App = () => {
 
@@ -23,14 +26,17 @@ const App = () => {
             <Container style={{marginTop:'50px'}}>
               <Switch>
                   <Route path='/products/:id' component={ProductDetails} />
-                  <Route path='/createproduct' component={CreateProductPage} />
-                  <Route path='/createcategory' component={CreateCategoryPage} />
+                  <Route path='/admin/products' exact component={AdminProductDashboard} />
+                  <Route path='/admin/products/:id' exact component={AdminProductEdit} />
+                  <Route path='/admin/createproduct' component={CreateProductPage} />
+                  <Route path='/admin/createcategory' component={CreateCategoryPage} />
               </Switch>
             </Container>
           </>
         )}
 
       />
+      <Footer />
     </>
   );
 }

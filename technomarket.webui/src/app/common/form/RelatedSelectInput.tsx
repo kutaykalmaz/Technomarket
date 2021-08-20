@@ -10,7 +10,7 @@ interface Props {
     name: string;
     options?: any;
     label?: string;
-    function: (e: any) => void;
+    function?: (e: any) => void;
 }
 
 
@@ -32,7 +32,7 @@ const RelatedSelectInput = (props: Props) => {
                 value={field.value || null}
                 onChange={(e, d) => {
                     helpers.setValue(d.value)
-                    props.function(d.value)
+                    props.function && props.function(d.value)
                 }}
                 onBlur={() => { helpers.setTouched(true) }}
                 placeholder={props.placeholder}

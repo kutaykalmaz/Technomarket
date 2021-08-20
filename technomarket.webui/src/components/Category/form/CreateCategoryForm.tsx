@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
-import { Box, TextField, Button, Card, CardContent, CircularProgress } from '@material-ui/core';
+import { Box, TextField, Button, Card, CardContent, CircularProgress, Grid } from '@material-ui/core';
 import { ISelectedCategory } from '../../../pages/admin/CreateCategoryPage';
 import { v4 as uuid } from 'uuid';
 import { useStore } from '../../../app/stores/store';
@@ -52,9 +52,24 @@ const CreateCategoryForm = ({ selectedCategory, setSelectedCategory }: Props) =>
                             <Box paddingBottom={2}>
                                 <Field name='name' label='Kategori Adı' as={TextField} variant="outlined" fullWidth margin="dense" helperText={<ErrorMessage name='name' />} error={!isValid}></Field>
                             </Box>
-                            <Button startIcon={loadingPost ? <CircularProgress size='1rem' /> : null} disabled={loadingPost || !isValid || !dirty} variant='contained' color='primary' type='submit'>
-                                {loadingPost ? 'Gönderiliyor' : 'Gönder'}
-                            </Button>
+
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <Button startIcon={loadingPost ? <CircularProgress size='1rem' /> : null} disabled={loadingPost || !isValid || !dirty} variant='contained' color='primary' type='submit'>
+                                        {loadingPost ? 'Gönderiliyor' : 'Gönder'}
+                                    </Button>
+                                </Grid>
+
+
+                                {
+                                    selectedCategory.id &&
+                                    <Grid item>
+                                        <Button disabled={loadingPost} variant='contained' color='secondary' type='button' onClick={() => setSelectedCategory({ id: '', name: '' })}>
+                                            Temizle
+                                        </Button>
+                                    </Grid>
+                                }
+                            </Grid>
                         </Form>
                     )}
 

@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { CreateProductFormValues, Product } from '../models/product';
 import { CategoryOptions, SubCategoryOptions } from '../models/categoryOptions'
 import { Category } from '../models/category';
-import { ISelectedCategory } from '../../pages/admin/CreateCategoryPage';
+import { ISelectedCategory, ISelectedSubCategory } from '../../pages/admin/CreateCategoryPage';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -60,7 +60,10 @@ const Categories = {
 }
 
 const SubCategories = {
-    subCategoriesOptions: () => requests.get<SubCategoryOptions[]>('/subcategories/options')
+    subCategoriesOptions: () => requests.get<SubCategoryOptions[]>('/subcategories/options'),
+    create: (subCategory: ISelectedSubCategory) => requests.post<void>('/subcategories', subCategory),
+    update: (subCategory: ISelectedSubCategory) => requests.put<void>(`/subcategories/${subCategory.id}`, subCategory),
+    delete: (id: string) => requests.del<void>(`/subcategories/${id}`)
 }
 
 const agent = {
