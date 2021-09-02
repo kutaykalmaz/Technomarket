@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-html {
-    font-size: 18px;
-}
-
-* {
-    font-family: 'Roboto', sans-serif;
-}
 
 body {
     background-color: #eee;

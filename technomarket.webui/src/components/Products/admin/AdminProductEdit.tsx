@@ -9,14 +9,14 @@ import AdminProductEditForm from './AdminProductEditForm'
 const AdminProductEdit = () => {
 
     const { productStore } = useStore()
-    const { selectedProduct: product,
-        loadProduct, loadingInitial, resetSelectedProduct } = productStore
+    const { productForEdit: product,
+        loadProductForEdit, loadingInitial, resetSelectedProduct } = productStore
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
-        if (id) loadProduct(id);
+        if (id) loadProductForEdit(id);
         return () => resetSelectedProduct();
-    }, [id, loadProduct, resetSelectedProduct]);
+    }, [id, loadProductForEdit, resetSelectedProduct]);
 
     if (loadingInitial) return (
         <LoadingComponent loading={loadingInitial} />

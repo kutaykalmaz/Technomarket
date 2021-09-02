@@ -1,9 +1,10 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { CreateProductFormValues, Product } from '../models/product';
+import { CreateProductFormValues, EditProductFormValues, Product } from '../models/product';
 
 export default class ProductStore {
-    products: Product[] = []
+    products: Product[] = [];
+    productForEdit: EditProductFormValues = new EditProductFormValues();
     loadingInitial = false;
     selectedProduct: Product | undefined = undefined;
 
@@ -37,7 +38,20 @@ export default class ProductStore {
             console.log(error)
             this.setLoadingInitial(false);
         }
+    }
 
+    loadProductForEdit = async (id: string) => {
+        this.loadingInitial = true;
+        try {
+            const product = await agent.Products.editDetails(id);
+            runInAction(() => {
+                this.productForEdit = product;
+            })
+            this.setLoadingInitial(false);
+        } catch (error) {
+            console.log(error)
+            this.setLoadingInitial(false);
+        }
     }
 
     createProduct = async (product: CreateProductFormValues) => {
@@ -51,12 +65,6 @@ export default class ProductStore {
             console.log(error)
         }
     }
-
-
-
-
-
-
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;

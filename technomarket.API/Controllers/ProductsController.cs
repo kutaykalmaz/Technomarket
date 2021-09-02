@@ -41,5 +41,11 @@ namespace technomarket.API.Controllers
             return HandleResult(await Mediator.Send(
                 new UpdateProduct.Command { Product = product }));
         }
+
+        [HttpGet("edit/{id}")]
+        public async Task<IActionResult> GetProductForEdit(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new ProductDetailsForEdit.Query { Id = id }));
+        }
     }
 }

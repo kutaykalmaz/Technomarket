@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { CreateProductFormValues, Product } from '../models/product';
+import { CreateProductFormValues, EditProductFormValues, Product } from '../models/product';
 import { CategoryOptions, SubCategoryOptions } from '../models/categoryOptions'
 import { Category } from '../models/category';
 import { ISelectedCategory, ISelectedSubCategory } from '../../pages/admin/CreateCategoryPage';
@@ -29,6 +29,7 @@ const requests = {
 const Products = {
     list: () => requests.get<Product[]>('/products'),
     details: (id: string) => requests.get<Product>(`/products/${id}`),
+    editDetails: (id: string) => requests.get<EditProductFormValues>(`/products/edit/${id}`),
     create: (product: CreateProductFormValues) => {
         let formData = new FormData();
         product.files?.forEach(file => {

@@ -11,11 +11,13 @@ import { ToastContainer } from 'react-toastify'
 import Footer from './Footer/Footer'
 import AdminProductDashboard from '../../components/Products/admin/AdminProductDashboard'
 import AdminProductEdit from '../../components/Products/admin/AdminProductEdit'
+import GlobalStyle from '../../styles/global'
 
 const App = () => {
 
   return (
     <>
+      <GlobalStyle />
       <ToastContainer position='bottom-left' autoClose={3000} />
       <Navbar />
       <Route path='/' component={HomePage} exact />

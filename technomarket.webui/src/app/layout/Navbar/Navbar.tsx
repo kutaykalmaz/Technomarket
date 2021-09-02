@@ -1,61 +1,66 @@
-import React from 'react'
-import { Button, Container, Dropdown, Menu, Segment } from 'semantic-ui-react'
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import Dropdown from './Dropdown'
+import {
+  NavbarWrapper, NavbarLogo, NavMenu, NavItem,
+  NavLinks, FaCaretDownStyled, Logo, NavbarContent, ButtonWrapper, Button
+} from './Navbar.elements'
+import LogoImage from '../../../assets/navbarLogowhite.png'
+
 
 const NavBar = () => {
+
+  const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+
+  const handleClick = () => setClick(!click);
+
+  const closeMobileMenu = () => setClick(false);
+
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(false);
+    }
+  };
+
   return (
-    <Segment inverted style={{ padding: '4px' }}>
-      <Menu secondary inverted>
-        <Container>
-          {/* <Menu.Item 
-            content='Anasayfa'
-            as={NavLink}
-            exact
-            to='/'            
-          /> */}
-          <Menu.Item as={Link} to='/'>
-            <img src="/assets/logo.png" alt='logo' />
-          </Menu.Item>
-          <Dropdown text='İşlemler' pointing className='link item'>
-            <Dropdown.Menu>
-              <Dropdown.Header content='Ürünler' />
-              <Dropdown.Item
-                as={NavLink}
-                to='/admin/products'
-              >
-                Ürünler
-              </Dropdown.Item>
-
-              <Dropdown.Item
-                as={NavLink}
-                to='/admin/createproduct'
-              >
-                Ürün Oluştur
-              </Dropdown.Item>
-
-              <Dropdown.Divider />
-              <Dropdown.Header content='KATEGORİLER' />
-              <Dropdown.Item
-                as={NavLink}
-                to='/admin/createcategory'
-              >
-                Kategori Yönetim
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Menu position='right'>
-            <Menu.Item>
-              <Button
-                inverted
-                content='Giriş Yap'
-                style={{ padding: '10px 20px' }}
-                color='blue'
-              />
-            </Menu.Item>
-          </Menu.Menu>
-        </Container>
-      </Menu>
-    </Segment>
+    <NavbarContent>
+      <NavbarWrapper>
+        <NavbarLogo to='/'>
+          <Logo src={LogoImage} />
+        </NavbarLogo>
+        <NavMenu>
+          <NavItem
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            <NavLinks to='/services' onClick={closeMobileMenu}>
+              İşlemler <FaCaretDownStyled />
+            </NavLinks>
+            {dropdown &&
+              <Dropdown />
+            }
+          </NavItem>
+          <NavItem>
+            <NavLinks to='/contact-us' onClick={closeMobileMenu}>
+              İletişim
+            </NavLinks>
+          </NavItem>
+          <ButtonWrapper to='/login'>
+            <Button>Giriş yap</Button>
+          </ButtonWrapper>
+        </NavMenu>
+      </NavbarWrapper>
+    </NavbarContent>
   )
 }
 

@@ -37,15 +37,18 @@ export class EditProductFormValues {
     categoryId: string = '';
     subCategoryId: string = '';
 
-    constructor(product: Product) {
-        this.id = product.id;
-        this.name = product.name;
-        this.price = product.price;
-        this.quantity = product.quantity;
-        this.isapproved = product.isApproved;
-        this.ishome = product.isHome;
-        this.description = product.description;
-        this.categoryId = product.category;
-        this.subCategoryId = product.subCategory
+    constructor(product?: Product) {
+        if (product) {
+            this.id = product.id;
+            this.name = product.name;
+            this.price = product.price;
+            this.quantity = product.quantity;
+            this.isapproved = product.isApproved;
+            this.ishome = product.isHome;
+            this.description = product.description;
+            this.categoryId = product.category;
+            this.subCategoryId = product.subCategory
+        }
+
     }
 }

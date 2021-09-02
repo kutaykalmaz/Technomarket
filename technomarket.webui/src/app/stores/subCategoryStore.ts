@@ -7,6 +7,7 @@ import { store } from './store'
 export default class SubCategoryStore {
     subCategoryOptions: SubCategoryOptions[] = []
     relatedSubCategoriesOptions: SubCategoryOptions[] = []
+    relatedSubCategoriesTemp: SubCategoryOptions[] = []
     loading = false;
     calculateLoading = false;
     deleteLoading = false;
@@ -82,6 +83,10 @@ export default class SubCategoryStore {
             if (value.categoryid === categoryId) this.relatedSubCategoriesOptions.push(value);
         })
         runInAction(() => this.calculateLoading = false);
+    }
+
+    loadRelatedSubCategory = async (categoryId: string) => {
+        if (this.subCategoryOptions) this.relatedSubCategoriesTemp = this.subCategoryOptions.filter(x => x.categoryid === categoryId)
     }
 
     resetSubCategoriesOptions = () => {
