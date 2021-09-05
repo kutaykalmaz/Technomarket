@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar/Navbar';
 import { observer } from 'mobx-react-lite';
 import { Route, Switch } from 'react-router-dom';
@@ -12,14 +12,24 @@ import Footer from './Footer/Footer'
 import AdminProductDashboard from '../../components/Products/admin/AdminProductDashboard'
 import AdminProductEdit from '../../components/Products/admin/AdminProductEdit'
 import GlobalStyle from '../../styles/global'
+import Sidebar from './Sidebar/Sidebar'
 
 const App = () => {
+
+  // Navbar mobile icon useState
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Navbar icon toggle onClick
+  const toggle = () => {
+      setIsOpen(!isOpen)
+  }
 
   return (
     <>
       <GlobalStyle />
       <ToastContainer position='bottom-left' autoClose={3000} />
-      <Navbar />
+      <Sidebar isOpen={isOpen} toggle={toggle} />
+      <Navbar toggle={toggle} />
       <Route path='/' component={HomePage} exact />
       <Route
         path={'/(.+)'}

@@ -6,8 +6,8 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family: 'PT Sans', sans-serif;
-    /* font-family: 'Montserrat', sans-serif; */
+    /* font-family: 'PT Sans', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
   }
   #root {

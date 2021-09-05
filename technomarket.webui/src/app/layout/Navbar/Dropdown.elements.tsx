@@ -3,6 +3,7 @@ import { Link as LinkR } from 'react-router-dom'
 
 interface Props {
   click: boolean;
+  sidebar?: boolean;
 }
 
 const fadeIn = keyframes`
@@ -16,14 +17,15 @@ const fadeIn = keyframes`
 
 export const DropdownWrapper = styled.ul`
   width: 200px;
-  position: absolute;
-  top: 80px;
+  
+  position: ${(props:Props) => props.sidebar ? 'block' : 'absolute'};
+  ${(props:Props) => !props.sidebar && 'top: 80px;'}
   list-style: none;
   text-align: start;
   z-index: 10000;
   animation: ${fadeIn} .7s;
 
-  ${(props: Props) => props.click && 'display : none;'}
+  ${(props: Props) => props.click && !props.sidebar && 'display : none;'}
 `
 
 export const DropdownItem = styled.li`

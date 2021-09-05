@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Tab } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/common/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import AdminProductEditForm from './AdminProductEditForm'
+import AdminProductEditForm from './editform/AdminProductEditForm'
 
 const AdminProductEdit = () => {
 

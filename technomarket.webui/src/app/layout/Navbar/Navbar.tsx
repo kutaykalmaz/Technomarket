@@ -2,19 +2,22 @@ import React, { useState } from 'react'
 import Dropdown from './Dropdown'
 import {
   NavbarWrapper, NavbarLogo, NavMenu, NavItem,
-  NavLinks, FaCaretDownStyled, Logo, NavbarContent, ButtonWrapper, Button
+  NavLinks, Logo, 
+  NavbarContent, ButtonWrapper, Button,
+  MenuIcon, FaBarsStyled, FaCaretDownStyled
 } from './Navbar.elements'
 import LogoImage from '../../../assets/navbarLogowhite.png'
 
 
-const NavBar = () => {
+interface Props {
+  toggle: () => void;
+}
 
-  const [click, setClick] = useState(false);
+
+const NavBar = ({ toggle }: Props) => {
+
   const [dropdown, setDropdown] = useState(false);
 
-  const handleClick = () => setClick(!click);
-
-  const closeMobileMenu = () => setClick(false);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -38,20 +41,23 @@ const NavBar = () => {
         <NavbarLogo to='/'>
           <Logo src={LogoImage} />
         </NavbarLogo>
+        <MenuIcon onClick={toggle}>
+          <FaBarsStyled />
+        </MenuIcon>
         <NavMenu>
           <NavItem
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            <NavLinks to='/services' onClick={closeMobileMenu}>
-              İşlemler <FaCaretDownStyled />
+            <NavLinks to='#'>
+              Yönetim <FaCaretDownStyled />
             </NavLinks>
             {dropdown &&
               <Dropdown />
             }
           </NavItem>
           <NavItem>
-            <NavLinks to='/contact-us' onClick={closeMobileMenu}>
+            <NavLinks to='/contact-us'>
               İletişim
             </NavLinks>
           </NavItem>

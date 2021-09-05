@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link as LinkR } from 'react-router-dom'
-import { FaCaretDown } from 'react-icons/fa'
+import { FaTimes, FaBars, FaCaretDown } from 'react-icons/fa'
+
 
 export const NavbarContent = styled.div`
   width: 100%;
@@ -31,8 +32,6 @@ export const Logo = styled.img`
 `
 
 
-export const FaCaretDownStyled = styled(FaCaretDown)`
-`
 
 export const NavMenu = styled.ul`
   display: grid;
@@ -41,6 +40,10 @@ export const NavMenu = styled.ul`
   text-align: center;
   justify-self: end;
   grid-gap: 20px;
+
+  @media screen and (max-width: 1200px) { 
+    display: none
+  }
   
 `
 
@@ -51,6 +54,9 @@ export const NavItem = styled.li`
 `
 
 export const NavLinks = styled(LinkR)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -82,12 +88,37 @@ export const Button = styled.button`
   color: #fff;
   background-color: #1888ff;
   margin-left: 10px;
+  transition: all 0.3s ease-in;
 
   &:hover {
     transition: all 0.3s ease-out;
-    background-color: transparent;
+    background-color: #005fc5;
     color: #fff;
-    border: 1px solid #1888ff;
   }
 `
 
+export const MenuIcon = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1200px) { 
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 100%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    
+  }
+`
+
+export const FaCaretDownStyled = styled(FaCaretDown)`
+  margin-left: 5px;
+`
+  
+
+export const FaBarsStyled = styled(FaBars)`
+  color: #fff;
+  font-size: 2rem;
+
+`
