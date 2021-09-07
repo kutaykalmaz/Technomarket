@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Tab } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/common/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import AdminProductEditForm from './editform/AdminProductEditForm'
+import AdminProductEditForm from './AdminProductEditForm'
+import AdminProductComments from './AdminProductComments'
 
 const AdminProductEdit = () => {
 
@@ -25,7 +26,7 @@ const AdminProductEdit = () => {
     const panes = [
         { menuItem: 'Ürün Bilgileri', render: () => <Tab.Pane>{product && <AdminProductEditForm product={product} />}</Tab.Pane> },
         { menuItem: 'Ürün Fotoğrafları', render: () => <Tab.Pane>Ürün Fotoğrafları</Tab.Pane> },
-        { menuItem: 'Ürün Yorumları', render: () => <Tab.Pane>Ürün Yorumları</Tab.Pane> },
+        { menuItem: 'Ürün Yorumları', render: () => <Tab.Pane><AdminProductComments /></Tab.Pane> },
     ]
 
 

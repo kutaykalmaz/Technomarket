@@ -5,91 +5,85 @@ import { SubCategoryOptions } from '../models/categoryOptions';
 import { store } from './store'
 
 export default class SubCategoryStore {
-    subCategoryOptions: SubCategoryOptions[] = []
-    relatedSubCategoriesOptions: SubCategoryOptions[] = []
-    relatedSubCategoriesTemp: SubCategoryOptions[] = []
-    loading = false;
-    calculateLoading = false;
-    deleteLoading = false;
-    selectedSubCategory: ISelectedSubCategory = { id: '', name: '', category: '' }
+  subCategoryOptions: SubCategoryOptions[] = []
+  relatedSubCategoriesOptions: SubCategoryOptions[] = []
+  loading = false;
+  calculateLoading = false;
+  deleteLoading = false;
+  selectedSubCategory: ISelectedSubCategory = { id: '', name: '', category: '' }
 
-    constructor() {
-        makeAutoObservable(this)
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  setSelectedSubCategory = (props: ISelectedSubCategory) => {
+    this.selectedSubCategory = { id: props.id, name: props.name, category: props.category }
+  }
+
+  loadSubCategoryOptions = async () => {
+    this.subCategoryOptions = []
+    this.loading = true;
+    try {
+      const result = await agent.SubCategories.subCategoriesOptions();
+      result.forEach(subCategoryOptions => {
+        this.setSubCategoryOptions(subCategoryOptions);
+      })
+      runInAction(() => this.loading = false);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    setSelectedSubCategory = (props: ISelectedSubCategory) => {
-        this.selectedSubCategory = { id: props.id, name: props.name, category: props.category }
+  createSubCategory = async (subCategory: ISelectedSubCategory) => {
+    this.loading = true;
+    try {
+      await agent.SubCategories.create(subCategory)
+      store.categoryStore.addOrUpdateSubCategory(subCategory);
+      runInAction(() => this.loading = false)
+    } catch (error) {
+      console.log(error)
+      runInAction(() => this.loading = false)
     }
+  }
 
-    loadSubCategoryOptions = async () => {
-        this.loading = true;
-        try {
-            const result = await agent.SubCategories.subCategoriesOptions();
-            result.forEach(subCategoryOptions => {
-                this.setSubCategoryOptions(subCategoryOptions);
-            })
-            runInAction(() => this.loading = false);
-        } catch (error) {
-            console.log(error);
-        }
+  updateSubCategory = async (subCategory: ISelectedSubCategory) => {
+    this.loading = true;
+    try {
+      await agent.SubCategories.update(subCategory)
+      store.categoryStore.addOrUpdateSubCategory(subCategory);
+      runInAction(() => this.loading = false)
+    } catch (error) {
+      console.log(error)
+      runInAction(() => this.loading = false)
     }
+  }
 
-    createSubCategory = async (subCategory: ISelectedSubCategory) => {
-        this.loading = true;
-        try {
-            await agent.SubCategories.create(subCategory)
-            store.categoryStore.addOrUpdateSubCategory(subCategory);
-            runInAction(() => this.loading = false)
-        } catch (error) {
-            console.log(error)
-            runInAction(() => this.loading = false)
-        }
+  deleteSubCategory = async (subCategory: ISelectedSubCategory) => {
+    this.deleteLoading = true;
+    try {
+      await agent.SubCategories.delete(subCategory.id)
+      store.categoryStore.deleteSubCategory(subCategory)
+      runInAction(() => this.deleteLoading = false)
+    } catch (error) {
+      console.log(error)
+      runInAction(() => this.deleteLoading = false)
     }
+  }
 
-    updateSubCategory = async (subCategory: ISelectedSubCategory) => {
-        this.loading = true;
-        try {
-            await agent.SubCategories.update(subCategory)
-            store.categoryStore.addOrUpdateSubCategory(subCategory);
-            runInAction(() => this.loading = false)
-        } catch (error) {
-            console.log(error)
-            runInAction(() => this.loading = false)
-        }
-    }
+  private setSubCategoryOptions = (subCategoryOptions: SubCategoryOptions) => {
+    this.subCategoryOptions.push(subCategoryOptions);
+  }
 
-    deleteSubCategory = async (subCategory: ISelectedSubCategory) => {
-        this.deleteLoading = true;
-        try {
-            await agent.SubCategories.delete(subCategory.id)
-            store.categoryStore.deleteSubCategory(subCategory)
-            runInAction(() => this.deleteLoading = false)
-        } catch (error) {
-            console.log(error)
-            runInAction(() => this.deleteLoading = false)
-        }
-    }
+  relatedSubCategories = async (categoryId: string) => {
+    this.relatedSubCategoriesOptions = [];
+    this.calculateLoading = true;
+    this.subCategoryOptions.forEach((value) => {
+      if (value.categoryid === categoryId) this.relatedSubCategoriesOptions.push(value);
+    })
+    runInAction(() => this.calculateLoading = false);
+  }
 
-
-
-    private setSubCategoryOptions = (subCategoryOptions: SubCategoryOptions) => {
-        this.subCategoryOptions.push(subCategoryOptions);
-    }
-
-    relatedSubCategories = async (categoryId: string) => {
-        this.relatedSubCategoriesOptions = [];
-        this.calculateLoading = true;
-        this.subCategoryOptions.forEach((value) => {
-            if (value.categoryid === categoryId) this.relatedSubCategoriesOptions.push(value);
-        })
-        runInAction(() => this.calculateLoading = false);
-    }
-
-    loadRelatedSubCategory = async (categoryId: string) => {
-        if (this.subCategoryOptions) this.relatedSubCategoriesTemp = this.subCategoryOptions.filter(x => x.categoryid === categoryId)
-    }
-
-    resetSubCategoriesOptions = () => {
-        this.subCategoryOptions = []
-    }
+  resetSubCategoriesOptions = () => {
+    this.subCategoryOptions = []
+  }
 }

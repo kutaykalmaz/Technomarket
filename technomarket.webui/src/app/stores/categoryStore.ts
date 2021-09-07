@@ -31,6 +31,7 @@ export default class CategoryStore {
     }
 
     loadCategoryOptions = async () => {
+        if (this.categoryOptions.length > 0) return;
         this.categoryOptions = []
         this.categoryOptionsLoading = true;
         try {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link as LinkR } from 'react-router-dom'
-import { FaTimes, FaBars, FaCaretDown } from 'react-icons/fa'
+import { FaBars, FaCaretDown } from 'react-icons/fa'
 
 
 export const NavbarContent = styled.div`

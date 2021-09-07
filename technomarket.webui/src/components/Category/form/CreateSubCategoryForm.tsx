@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { ISelectedSubCategory } from '../../../pages/admin/CreateCategoryPage'
 import * as Yup from 'yup';
 import { useStore } from '../../../app/stores/store'
-import RelatedSelectInput from '../../../app/common/form/RelatedSelectInput'
+import SelectInput from '../../../app/common/form/SelectInput'
 import { v4 as uuid } from 'uuid';
 import { toast } from 'react-toastify'
 
@@ -53,7 +53,7 @@ const CreateSubCategoryForm = () => {
                                 <Field name='name' label='Alt Kategori Adı' as={TextField} variant="outlined" fullWidth margin="dense" helperText={<ErrorMessage name='name' />} error={!isValid}></Field>
                             </Box>
                             <Box paddingBottom={2}>
-                                <RelatedSelectInput placeholder='Kategori' name='category' label='Kategori' options={categoryOptions} />
+                                <SelectInput name='category' label='Kategori' options={categoryOptions} />
                             </Box>
                             <Button startIcon={loadingSubCategory ? <CircularProgress size='1rem' /> : null} disabled={loadingSubCategory || !isValid || !dirty} variant='contained' color='primary' type='submit'>
                                 {loadingSubCategory ? 'Gönderiliyor' : 'Gönder'}

@@ -1,10 +1,11 @@
 import React from 'react'
 import { useField } from 'formik'
-import { Form, Label, Select } from 'semantic-ui-react'
-import { Box, InputLabel } from '@material-ui/core';
+import { Form, Select } from 'semantic-ui-react'
+import ErrorMessage from './ErrorMessage/ErrorMessage';
+import { InputLabel } from './TextInput.elements';
 
 interface Props {
-    placeholder: string;
+    placeholder?: string;
     name: string;
     options?: any;
     label?: string;
@@ -18,26 +19,22 @@ const SelectInput = (props: Props) => {
     return (
         // '!!' casts string into a boolean
         <Form.Field error={meta.touched && !!meta.error}>
-            <Box paddingBottom={2}>
-                <InputLabel>{props.label}</InputLabel>
-            </Box>
+            <InputLabel>{props.label}</InputLabel>
             <Select
+                noResultsMessage='Bir sonuç bulunamadı'
                 disabled={props.disabled}
                 fluid
                 search
-                selection
                 clearable
                 options={props.options}
-                value={field.value || null}
+                value={field.value}
                 onChange={(e, d) => helpers.setValue(d.value)}
                 onBlur={() => helpers.setTouched(true)}
                 placeholder={props.placeholder}
                 loading={props.loading}
 
             />
-            {meta.touched && meta.error ? (
-                <Label basic color='red'>{meta.error}</Label>
-            ) : null}
+            <ErrorMessage meta={meta} />
         </Form.Field>
     )
 }

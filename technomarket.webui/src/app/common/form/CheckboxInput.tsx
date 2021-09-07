@@ -1,23 +1,21 @@
 import React from 'react'
-import { useField } from 'formik'
-import { Form } from 'semantic-ui-react'
+import { Box } from '@material-ui/core'
+import { InputLabel } from './TextInput.elements'
 
 interface Props {
-    name: string;
-    label?: string;
-    type?: string;
+  name: string;
+  label?: string;
 }
 
 const CheckboxInput = (props: Props) => {
 
-    const [field] = useField(props.name)
 
-    return (
-        <Form.Field>
-                <label>{props.label}</label>
-                <input {...field} {...props} className='checkbox ui' />
-        </Form.Field>
-    )
+  return (
+    <Box paddingBottom={3}>
+      <InputLabel checkbox>{props.label}</InputLabel>
+      <input type="checkbox" className='ui checkbox' />
+    </Box>
+  )
 }
 
 export default CheckboxInput

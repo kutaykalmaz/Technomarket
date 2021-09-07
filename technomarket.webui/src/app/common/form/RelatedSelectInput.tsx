@@ -1,48 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useField } from 'formik'
-import { Form, Label, Select } from 'semantic-ui-react'
-import { Box, InputLabel } from '@material-ui/core';
-import './inputStyle.css'
+import { Form, Select } from 'semantic-ui-react'
+import { InputLabel } from './TextInput.elements';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
 
 interface Props {
-    placeholder: string;
-    name: string;
-    options?: any;
-    label?: string;
-    function?: (e: any) => void;
+  name: string;
+  options?: any;
+  label?: string;
+  changeOption: (e: any) => void;
+  loading?: boolean;
 }
 
 
-const RelatedSelectInput = (props: Props) => {
-    const [field, meta, helpers] = useField(props.name);
-    return (
-        // '!!' casts string into a boolean
-        <Form.Field error={meta.touched && !!meta.error}>
-            <Box paddingBottom={2}>
-                <InputLabel>{props.label}</InputLabel>
-            </Box>
-            <Select
-                className='inputStyle'
-                fluid
-                search
-                selection
-                clearable
-                options={props.options}
-                value={field.value || null}
-                onChange={(e, d) => {
-                    helpers.setValue(d.value)
-                    props.function && props.function(d.value)
-                }}
-                onBlur={() => { helpers.setTouched(true) }}
-                placeholder={props.placeholder}
+const RelatedSelectInput = ({ name, options, label, changeOption, loading }: Props) => {
+  const [field, meta, helpers] = useField(name);
 
-            />
-            {meta.touched && meta.error ? (
-                <Label basic color='red'>{meta.error}</Label>
-            ) : null}
-        </Form.Field>
-    )
+  useEffect(() => {
+    changeOption(field.value)
+    console.log('girdi')
+  }, [field.value, changeOption])
+
+
+  return (
+    <Form.Field error={meta.touched && !!meta.error}>
+      <InputLabel>{label}</InputLabel>
+      <Select
+        loading={loading}
+        noResultsMessage='Bir sonuç bulunamadı'
+        {...field}
+        fluid
+        search
+        clearable
+        value={field.value}
+        options={options}
+        onChange={(e, d) => {
+          helpers.setValue(d.value)
+        }}
+        onBlur={() => { helpers.setTouched(true) }}
+
+      />
+      <ErrorMessage meta={meta} />
+    </Form.Field>
+  )
 }
 
 export default RelatedSelectInput
